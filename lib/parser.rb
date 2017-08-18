@@ -3,38 +3,40 @@ require 'parslet'
 class JxParser < Parslet::Parser
   root :expr
 
-  rule(:expr) { fn_call >> eol }
+  rule :expr do
+    fn_call >> eol
+  end
 
-  rule(:fn_call) {
+  rule :fn_call do
     ident.as(:name) >> str('(') >> string.as(:arg) >> str(')')
-  }
+  end
 
-  rule(:ident) {
+  rule :ident do
     match['a-z'].repeat
-  }
+  end
 
-  rule :string {
+  rule :string do
     str('"') >>
     (
       (str('\\') >> any) |
       (str('"').absent? >> any)
     ).repeat.as(:string) >>
     str('"')
-  }
+  end
 
-  rule :space {
+  rule :space do
     (match '[ ]').repeat(1)
-  }
+  end
 
-  rule :eol {
+  rule :eol do
     line_end.repeat(1)
-  }
+  end
 
-  rule :line_end {
+  rule :line_end do
     crlf >> space.maybe
-  }
+  end
 
-  rule :crlf {
+  rule :crlf do
     match('[\r\n]').repeat(1)
-  }
+  end
 end
