@@ -1,7 +1,11 @@
 require 'parslet'
 
 class JxParser < Parslet::Parser
-  root :expr
+  root :expr_list
+
+  rule :expr_list do
+    expr.repeat(1).as(:expr_list)
+  end
 
   rule :expr do
     fn_call >> eol
