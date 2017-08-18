@@ -1,3 +1,25 @@
 #!/usr/bin/env ruby
 
-require_relative '../jxc.rb'
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: jxc [options] SOURCE"
+
+  opts.on("-o", "--output TARGET", "Output destination") do |o|
+    options[:output] = o
+  end
+end.parse!
+
+if ARGV.size != 1
+  puts "Must provide one SOURCE file"
+  exit 1
+end
+
+require_relative '../lib/compiler'
+
+src_file = ARGV[0]
+src = File.read src_file
+raise "source file must be .jx file" unless src_file.end_with?(".jx")
+dest = options[:output] || File.basename(src_file).sub(/\.jx\Z/, ".cpp")
+File.write dest, JxCompiler.new(src).to_cpp
