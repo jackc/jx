@@ -16,10 +16,10 @@ if ARGV.size != 1
   exit 1
 end
 
-require_relative '../lib/compiler'
+require_relative '../lib/jx'
 
 src_file = ARGV[0]
 src = File.read src_file
 raise "source file must be .jx file" unless src_file.end_with?(".jx")
 dest = options[:output] || File.basename(src_file).sub(/\.jx\Z/, ".cpp")
-File.write dest, JxCompiler.new(src).to_cpp
+File.write dest, Jx::Compiler.new(src).to_cpp
