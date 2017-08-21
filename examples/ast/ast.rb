@@ -3,10 +3,12 @@ require 'jx'
 pkg = Jx::Package.new "util"
 pkg.functions["greet"] = Jx::Function.new(
   "greet",
-  nil,
+  [
+    Jx::Parameter.new("name", Jx::TypeRef.new("std::string"))
+  ],
   Jx::ExprList.new(
     [
-      Jx::FuncCall.new("puts", [Jx::StringLiteral.new("Greetings")]),
+      Jx::FuncCall.new("puts", [Jx::Variable.new("name")]),
     ]
   )
 )
@@ -17,13 +19,14 @@ ast = Jx::ExprList.new(
   [
     Jx::FuncCall.new("puts", [Jx::StringLiteral.new("Hello, world")]),
     Jx::FuncCall.new("puts", [Jx::StringLiteral.new("Goodbye, world")]),
-    Jx::FuncCall.new("greet", []),
+    Jx::FuncCall.new("greet", [Jx::StringLiteral.new("Jack")]),
   ]
 )
 
 
 cpp = ERB.new <<-'CPP'
 #include <iostream>
+#include <string>
 
 <%= pkg.to_h %>
 

@@ -20,7 +20,7 @@ module Jx
 
   private
     def signature
-      "void #{name}()"
+      "void #{name}(#{parameters.map(&:to_cpp).join(", ")})"
     end
   end
 end
