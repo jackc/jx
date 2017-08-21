@@ -6,7 +6,7 @@ pkg.functions["greet"] = Jx::Function.new(
   nil,
   Jx::ExprList.new(
     [
-      Jx::FnCall.new("puts", Jx::StringLiteral.new("Greetings")),
+      Jx::FuncCall.new("puts", [Jx::StringLiteral.new("Greetings")]),
     ]
   )
 )
@@ -15,8 +15,8 @@ Jx::FuncCall.new("greet", []).to_cpp
 
 ast = Jx::ExprList.new(
   [
-    Jx::FnCall.new("puts", Jx::StringLiteral.new("Hello, world")),
-    Jx::FnCall.new("puts", Jx::StringLiteral.new("Goodbye, world")),
+    Jx::FuncCall.new("puts", [Jx::StringLiteral.new("Hello, world")]),
+    Jx::FuncCall.new("puts", [Jx::StringLiteral.new("Goodbye, world")]),
     Jx::FuncCall.new("greet", []),
   ]
 )
