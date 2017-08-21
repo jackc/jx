@@ -27,6 +27,22 @@ FnCall = Struct.new(:name, :arg) do
   end
 end
 
+Fn = Struct.new(:name, :parameters, :expr_list) do
+  def to_cpp
+    <<-CPP
+void #{name}(#{converted_parameters.join(",")}) {
+    #{expr_list}
+}
+CPP
+  end
+
+  private
+
+  def converted_parameters
+    parameters.map { |p| "std::string #{p}" }
+  end
+end
+
 class JxTransform < Parslet::Transform
   rule(:string => simple(:x)) { StringLiteral.new x }
   rule(:name => simple(:name), :arg => simple(:arg)) { FnCall.new(name, arg) }
