@@ -7,14 +7,10 @@ module Jx
     def initialize(name, arguments)
       @name = name
       @arguments = arguments
-
-      if @name == "puts"
-        @name = "std::cout<<"
-      end
     end
 
     def to_cpp
-      "#{name}(#{arguments.map(&:to_cpp).join(", ")});"
+      "#{name.to_cpp}(#{arguments.map(&:to_cpp).join(", ")});"
     end
   end
 end

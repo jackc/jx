@@ -8,5 +8,5 @@ $(P): $(OBJECTS)
 	$(CXX) $(CPPFLAGS) $(OBJECTS) -o $@ $(LDFLAGS) $(LDLIBS)
 
 hello.cpp: hello.jx
-	jxc hello.jx > hello.cpp
+	jxc hello.jx
 

@@ -9,15 +9,25 @@ module Jx
     end
 
     rule :expr do
-      fn_call >> eol
+      (fn_call >> eol) |
+      (var_decl >> eol) |
+      (assignment >> eol)
     end
 
     rule :fn_call do
-      ident.as(:name) >> str('(') >> string.as(:arg) >> str(')')
+      ident.as(:name) >> str('(') >> (string | ident).as(:arg) >> str(')')
+    end
+
+    rule :var_decl do
+      (str('var') >> space >> ident).as(:var_decl)
+    end
+
+    rule :assignment do
+      ident.as(:left) >> space >> str('=').as(:assign) >> space >> (string | ident).as(:right)
     end
 
     rule :ident do
-      match['a-z'].repeat
+      match['a-z'].repeat.as(:ident)
     end
 
     rule :string do
