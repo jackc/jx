@@ -1,0 +1,7 @@
+var firstname
+firstname = "John"
+var lastname
+lastname = "Smith"
+var name
+name = firstname + " " + lastname
+puts(name)

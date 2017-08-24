@@ -9,19 +9,42 @@ module Jx
     end
 
     rule :stmt do
-      expr.as(:stmt) >> eol
+      (
+        var_decl |
+        expr
+      ).as(:stmt) >> eol
     end
 
+    def strip atom
+      space.repeat >> atom.as(:stripped) >> space.repeat
+    end
+
+    rule(:mul_op) { strip match['*/'] }
+    rule(:add_op) { strip match['+-'] }
+
     rule :expr do
+      infix_expr |
+      simple_expr
+    end
+
+    rule :infix_expr do
+      infix_expression(simple_expr,
+        [mul_op, 2, :left],
+        [add_op, 1, :right]
+      )
+    end
+
+    rule :simple_expr do
       (
         fn_call |
-        var_decl |
-        assignment
+        assignment |
+        string |
+        ident
       )
     end
 
     rule :fn_call do
-      ident.as(:name) >> str('(') >> (string | ident).as(:arg) >> str(')')
+      ident.as(:name) >> str('(') >> expr.as(:arg) >> str(')')
     end
 
     rule :var_decl do
@@ -29,7 +52,7 @@ module Jx
     end
 
     rule :assignment do
-      ident.as(:left) >> space >> str('=').as(:assign) >> space >> (string | ident).as(:right)
+      ident.as(:left) >> space >> str('=').as(:assign) >> space >> expr.as(:right)
     end
 
     rule :ident do

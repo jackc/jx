@@ -7,7 +7,7 @@ module Jx
     end
 
     def to_cpp
-      "std::string #{@name.to_cpp};"
+      "std::string #{@name.to_cpp}"
     end
   end
 end

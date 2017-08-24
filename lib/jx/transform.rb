@@ -2,6 +2,7 @@ require 'parslet'
 
 module Jx
   class Transform < Parslet::Transform
+    rule(:stripped => simple(:x)) { x }
     rule(:ident => simple(:x)) { Ident.new x }
     rule(:string => simple(:x)) { StringLiteral.new x }
     rule(:name => simple(:name), :arg => simple(:arg)) { FuncCall.new(name, [arg]) }
@@ -9,5 +10,6 @@ module Jx
     rule(:stmt => simple(:x)) { Stmt.new x }
     rule(:var_decl => simple(:x)) { VarDecl.new x }
     rule(left: simple(:left), assign: simple(:m), right: simple(:right)) { Assignment.new left, right }
+    rule(l: simple(:l), o: simple(:o), r: simple(:r)) { InfixCall.new l, o, r }
   end
 end
