@@ -8,7 +8,7 @@ module Jx
     end
 
     def to_cpp
-      "#{left.to_cpp} = #{right.to_cpp};"
+      "#{left.to_cpp} = #{right.to_cpp}"
     end
   end
 end

@@ -2,16 +2,22 @@ require 'parslet'
 
 module Jx
   class Parser < Parslet::Parser
-    root :expr_list
+    root :stmt_list
 
-    rule :expr_list do
-      expr.repeat(1).as(:expr_list)
+    rule :stmt_list do
+      stmt.repeat(1).as(:stmt_list)
+    end
+
+    rule :stmt do
+      expr.as(:stmt) >> eol
     end
 
     rule :expr do
-      (fn_call >> eol) |
-      (var_decl >> eol) |
-      (assignment >> eol)
+      (
+        fn_call |
+        var_decl |
+        assignment
+      )
     end
 
     rule :fn_call do

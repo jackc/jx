@@ -10,7 +10,7 @@ module Jx
     end
 
     def to_cpp
-      "#{name.to_cpp}(#{arguments.map(&:to_cpp).join(", ")});"
+      "#{name.to_cpp}(#{arguments.map(&:to_cpp).join(", ")})"
     end
   end
 end
