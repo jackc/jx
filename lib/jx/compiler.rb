@@ -22,6 +22,10 @@ module Jx
   CPP
 
       cpp.result(binding)
+
+ rescue Parslet::ParseFailed => error
+    puts error.parse_failure_cause.ascii_tree
+
     end
   end
 end

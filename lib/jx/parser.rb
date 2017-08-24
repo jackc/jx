@@ -10,6 +10,7 @@ module Jx
 
     rule :stmt do
       (
+        while_loop |
         var_decl |
         expr
       ).as(:stmt) >> eol
@@ -21,6 +22,7 @@ module Jx
 
     rule(:mul_op) { strip match['*/'] }
     rule(:add_op) { strip match['+-'] }
+    rule(:comp_op) { strip match['<>'] }
 
     rule :expr do
       infix_expr |
@@ -29,8 +31,9 @@ module Jx
 
     rule :infix_expr do
       infix_expression(simple_expr,
-        [mul_op, 2, :left],
-        [add_op, 1, :right]
+        [mul_op, 3, :left],
+        [add_op, 2, :right],
+        [comp_op, 1, :right]
       )
     end
 
@@ -56,8 +59,19 @@ module Jx
       ident.as(:left) >> space >> str('=').as(:assign) >> space >> expr.as(:right)
     end
 
+    rule :while_loop do
+      str('while') >> space >> expr.as(:while_cond) >> line_end >>
+        stmt_list >>
+      str('end')
+    end
+
     rule :ident do
-      match['a-z'].repeat.as(:ident)
+      keyword.absent? >> match['a-z'].repeat.as(:ident)
+    end
+
+    rule :keyword do
+      str('while') |
+      str('end')
     end
 
     rule :string do
