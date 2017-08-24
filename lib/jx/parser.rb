@@ -39,6 +39,7 @@ module Jx
         fn_call |
         assignment |
         string |
+        integer |
         ident
       )
     end
@@ -48,7 +49,7 @@ module Jx
     end
 
     rule :var_decl do
-      (str('var') >> space >> ident).as(:var_decl)
+      str('var') >> space >> ident >> space >> match['a-z'].repeat(1).as(:type)
     end
 
     rule :assignment do
@@ -71,6 +72,9 @@ module Jx
     rule :space do
       (match '[ ]').repeat(1)
     end
+
+    rule(:integer) { strip digit.repeat(1).as(:integer) }
+    rule(:digit) { match['0-9'] }
 
     rule :eol do
       line_end.repeat(1)

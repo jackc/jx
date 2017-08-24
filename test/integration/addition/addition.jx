@@ -1,7 +1,12 @@
-var firstname
+var firstname string
 firstname = "John"
-var lastname
+var lastname string
 lastname = "Smith"
-var name
+var name string
 name = firstname + " " + lastname
 puts(name)
+var n int
+n = 40
+var m int
+m = 2
+puts(n+m)
