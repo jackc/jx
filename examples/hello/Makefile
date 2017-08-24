@@ -10,3 +10,6 @@ $(P): $(OBJECTS)
 hello.cpp: hello.jx
 	jxc hello.jx
 
+.PHONY: clean
+clean:
+	rm -f $(P) $(OBJECTS) *.cpp
