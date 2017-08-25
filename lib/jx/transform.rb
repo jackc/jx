@@ -13,5 +13,6 @@ module Jx
     rule(left: simple(:left), assign: simple(:m), right: simple(:right)) { Assignment.new left, right }
     rule(l: simple(:l), o: simple(:o), r: simple(:r)) { InfixCall.new l, o, r }
     rule(while_cond: simple(:cond), stmt_list: sequence(:stmt_list)) { WhileLoop.new cond, StmtList.new(stmt_list) }
+    rule(if_cond: simple(:cond), stmt_list: sequence(:stmt_list)) { If.new cond, StmtList.new(stmt_list) }
   end
 end

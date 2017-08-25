@@ -11,6 +11,7 @@ module Jx
     rule :stmt do
       (
         while_loop |
+        if_a |
         var_decl |
         expr
       ).as(:stmt) >> eol
@@ -65,13 +66,21 @@ module Jx
       str('end')
     end
 
+    # if_a instead of if because if is already Ruby keyword
+    rule :if_a do
+      str('if') >> space >> expr.as(:if_cond) >> line_end >>
+        stmt_list >>
+      str('end')
+    end
+
     rule :ident do
       keyword.absent? >> match['a-z'].repeat.as(:ident)
     end
 
     rule :keyword do
       str('while') |
-      str('end')
+      str('end') |
+      str('if')
     end
 
     rule :string do
