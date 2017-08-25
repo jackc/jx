@@ -1,8 +1,4 @@
 puts("What is your name? ")
 var name string
 gets(name)
-puts("Hello, ")
-puts(name)
-var foo string
-foo = name
-puts(foo)
+puts("Hello, " + name)
