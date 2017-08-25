@@ -8,6 +8,9 @@ module Jx
       @name = name
     end
 
+    def each_descendant(&block)
+    end
+
     def to_cpp
       @name
     end

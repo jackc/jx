@@ -9,6 +9,13 @@ module Jx
       @arguments = arguments
     end
 
+    def each_descendant(&block)
+      arguments.each do |a|
+        a.each_descendant &block
+        yield a
+      end
+    end
+
     def to_cpp
       "#{name.to_cpp}(#{arguments.map(&:to_cpp).join(", ")})"
     end

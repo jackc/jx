@@ -8,6 +8,14 @@ module Jx
       @right = right
     end
 
+    def each_descendant(&block)
+      left.each_descendant &block
+      yield left
+
+      right.each_descendant &block
+      yield right
+    end
+
     def to_cpp
       "#{left.to_cpp} #{op} #{right.to_cpp}"
     end

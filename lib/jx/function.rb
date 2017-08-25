@@ -10,6 +10,16 @@ module Jx
       @expr_list = expr_list
     end
 
+    def each_descendant(&block)
+      parameters.each do |p|
+        p.each_descendant &block
+        yield p
+      end
+
+      expr_list.each_descendant &block
+      yield expr_list
+    end
+
     def to_h
       "#{signature};"
     end

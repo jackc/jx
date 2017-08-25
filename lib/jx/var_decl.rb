@@ -7,6 +7,9 @@ module Jx
       @type = type
     end
 
+    def each_descendant(&block)
+    end
+
     def to_cpp
       cpptype = case type
       when "string"

@@ -9,6 +9,14 @@ module Jx
       @stmt_list = stmt_list
     end
 
+    def each_descendant(&block)
+      cond.each_descendant &block
+      yield cond
+
+      stmt_list.each_descendant &block
+      yield stmt_list
+    end
+
     def to_cpp
       <<-CPP
 if(#{@cond.to_cpp}) {
