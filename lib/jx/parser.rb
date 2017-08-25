@@ -32,8 +32,8 @@ module Jx
     rule :infix_expr do
       infix_expression(simple_expr,
         [mul_op, 3, :left],
-        [add_op, 2, :right],
-        [comp_op, 1, :right]
+        [add_op, 2, :left],
+        [comp_op, 1, :left]
       )
     end
 
