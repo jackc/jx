@@ -34,8 +34,7 @@ module Jx
 
   private
     def signature
-      # "void #{name}(#{parameters.map(&:to_cpp).join(", ")})"
-      "void #{name}(std::string s)"
+      "void #{name}(#{parameters.map(&:to_cpp).join(", ")})"
     end
   end
 end

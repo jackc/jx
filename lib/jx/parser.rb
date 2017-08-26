@@ -50,7 +50,10 @@ module Jx
     end
 
     rule :fn_call do
-      ident.as(:name) >> str('(') >> expr.as(:arg) >> str(')')
+      ident.as(:fn_name) >> str('()') |
+      ident.as(:fn_name) >> str('(') >>
+        (expr >> (str(', ') >> expr).repeat).maybe.as(:args) >>
+      str(')')
     end
 
     rule :var_decl do

@@ -6,7 +6,9 @@ module Jx
     rule(:ident => simple(:x)) { Ident.new x }
     rule(:string => simple(:x)) { StringLiteral.new x }
     rule(:integer => simple(:x)) { IntegerLiteral.new x }
-    rule(:name => simple(:name), :arg => simple(:arg)) { FuncCall.new(name, [arg]) }
+    rule(:fn_name => simple(:fn_name)) { FuncCall.new(fn_name, []) }
+    rule(:fn_name => simple(:fn_name), :args => simple(:args)) { FuncCall.new(fn_name, [args]) }
+    rule(:fn_name => simple(:fn_name), :args => sequence(:args)) { FuncCall.new(fn_name, args) }
     rule(:stmt_list => sequence(:stmt_list)) { StmtList.new(stmt_list) }
     rule(:stmt => simple(:x)) { Stmt.new x }
     rule(ident: simple(:ident), type: simple(:type)) { VarDecl.new ident, type }
