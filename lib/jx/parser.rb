@@ -13,6 +13,7 @@ module Jx
         while_loop |
         if_a |
         var_decl |
+        fn_decl |
         expr
       ).as(:stmt) >> eol
     end
@@ -62,6 +63,12 @@ module Jx
 
     rule :while_loop do
       str('while') >> space >> expr.as(:while_cond) >> line_end >>
+        stmt_list >>
+      str('end')
+    end
+
+    rule :fn_decl do
+      str('fn').as(:fn_decl) >> space >> ident >> line_end >>
         stmt_list >>
       str('end')
     end

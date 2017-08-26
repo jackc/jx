@@ -1,0 +1,5 @@
+fn greet
+  puts("Hello, world!")
+end
+
+greet("Foo")

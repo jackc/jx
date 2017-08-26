@@ -14,5 +14,6 @@ module Jx
     rule(l: simple(:l), o: simple(:o), r: simple(:r)) { InfixCall.new l, o, r }
     rule(while_cond: simple(:cond), stmt_list: sequence(:stmt_list)) { WhileLoop.new cond, StmtList.new(stmt_list) }
     rule(if_cond: simple(:cond), stmt_list: sequence(:stmt_list)) { If.new cond, StmtList.new(stmt_list) }
+    rule(fn_decl: simple(:fn), ident: simple(:ident), stmt_list: sequence(:stmt_list)) { Function.new ident, [], StmtList.new(stmt_list) }
   end
 end

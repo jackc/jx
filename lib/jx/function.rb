@@ -2,12 +2,12 @@ require 'erb'
 
 module Jx
   class Function
-    attr_accessor :name, :parameters, :expr_list
+    attr_accessor :name, :parameters, :stmt_list
 
-    def initialize(name, parameters, expr_list)
+    def initialize(name, parameters, stmt_list)
       @name = name
       @parameters = parameters
-      @expr_list = expr_list
+      @stmt_list = stmt_list
     end
 
     def each_descendant(&block)
@@ -16,21 +16,26 @@ module Jx
         yield p
       end
 
-      expr_list.each_descendant &block
-      yield expr_list
+      stmt_list.each_descendant &block
+      yield stmt_list
     end
 
     def to_h
       "#{signature};"
     end
 
+    def to_def
+      "#{signature} {\n    #{stmt_list.to_cpp}\n}"
+    end
+
     def to_cpp
-      "#{signature} {\n    #{expr_list.to_cpp}\n}"
+      ""
     end
 
   private
     def signature
-      "void #{name}(#{parameters.map(&:to_cpp).join(", ")})"
+      # "void #{name}(#{parameters.map(&:to_cpp).join(", ")})"
+      "void #{name}(std::string s)"
     end
   end
 end

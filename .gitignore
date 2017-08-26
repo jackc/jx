@@ -3,3 +3,4 @@
 
 examples/ast/ast
 examples/hello/hello
+tmp/*
