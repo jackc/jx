@@ -1,0 +1,5 @@
+fn triple(n int) -> int
+  return n + n + n
+end
+
+puts(triple(2))

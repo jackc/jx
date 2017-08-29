@@ -2,6 +2,7 @@ require 'erb'
 
 require_relative 'parser'
 require_relative 'transform'
+# require 'pp'
 
 module Jx
   class Compiler
@@ -14,6 +15,8 @@ module Jx
       abstract_tree = Transform.new.apply(intermediary_tree)
 
       # require 'pry'; binding.pry
+
+      # pp abstract_tree
 
       functions = {}
       symbol_table = {}

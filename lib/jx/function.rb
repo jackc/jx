@@ -2,12 +2,13 @@ require 'erb'
 
 module Jx
   class Function
-    attr_accessor :name, :parameters, :stmt_list
+    attr_accessor :name, :parameters, :stmt_list, :return_type
 
-    def initialize(name, parameters, stmt_list)
+    def initialize(name, parameters, stmt_list, return_type)
       @name = name
       @parameters = parameters
       @stmt_list = stmt_list
+      @return_type = return_type || "void"
     end
 
     def each_descendant(&block)
@@ -34,7 +35,7 @@ module Jx
 
   private
     def signature
-      "void #{name}(#{parameters.map(&:to_cpp).join(", ")})"
+      "#{return_type} #{name}(#{parameters.map(&:to_cpp).join(", ")})"
     end
   end
 end

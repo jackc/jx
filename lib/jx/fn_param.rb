@@ -1,7 +1,7 @@
 require 'erb'
 
 module Jx
-  class Parameter
+  class FnParam
     attr_accessor :name, :type
 
     def initialize(name, type)
@@ -13,7 +13,13 @@ module Jx
     end
 
     def to_cpp
-      "#{type.to_cpp} #{name.to_cpp}"
+      cpptype = case type
+      when "string"
+        "std::string"
+      when "int"
+        "int"
+      end
+      "#{cpptype} #{@name.to_cpp}"
     end
   end
 end

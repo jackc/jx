@@ -14,7 +14,8 @@ module Jx
         if_a |
         var_decl |
         fn_decl |
-        expr
+        expr |
+        fn_return
       ).as(:stmt) >> eol
     end
 
@@ -57,7 +58,7 @@ module Jx
     end
 
     rule :var_decl do
-      str('var') >> space >> ident >> space >> match['a-z'].repeat(1).as(:type)
+      str('var').as(:var_decl) >> space >> ident >> space >> match['a-z'].repeat(1).as(:type)
     end
 
     rule :assignment do
@@ -71,9 +72,20 @@ module Jx
     end
 
     rule :fn_decl do
-      str('fn').as(:fn_decl) >> space >> ident >> line_end >>
+      str('fn').as(:fn_decl) >> space >> ident >>
+      (str('(') >> fn_param.repeat >> str(')')).maybe.as(:params) >>
+      (space >> str('->') >> space >> match['a-z'].repeat(1).as(:return_type)).maybe >>
+      line_end >>
         stmt_list >>
       str('end')
+    end
+
+    rule :fn_param do
+      ident.as(:fn_param) >> space >> match['a-z'].repeat(1).as(:type)
+    end
+
+    rule :fn_return do
+      str('return').as(:fn_return) >> space >> expr.maybe.as(:value)
     end
 
     # if_a instead of if because if is already Ruby keyword
@@ -90,7 +102,8 @@ module Jx
     rule :keyword do
       str('while') |
       str('end') |
-      str('if')
+      str('if') |
+      str('return')
     end
 
     rule :string do
