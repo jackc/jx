@@ -24,7 +24,7 @@ module Jx
         if node.kind_of? Jx::VarDecl
           symbol_table[node.name] = node
         end
-        if node.kind_of? Jx::Function
+        if node.kind_of? Jx::FnDef
           symbol_table[node.name] = node
           functions[node.name] = node
         end

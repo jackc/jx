@@ -3,10 +3,10 @@ end
 
 require_relative 'jx/assignment'
 require_relative 'jx/compiler'
+require_relative 'jx/fn_call'
+require_relative 'jx/fn_def'
 require_relative 'jx/fn_param'
 require_relative 'jx/fn_return'
-require_relative 'jx/func_call'
-require_relative 'jx/function'
 require_relative 'jx/ident'
 require_relative 'jx/if'
 require_relative 'jx/infix_call'

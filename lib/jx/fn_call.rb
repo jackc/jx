@@ -1,7 +1,7 @@
 require 'erb'
 
 module Jx
-  class FuncCall
+  class FnCall
     attr_accessor :name, :arguments
 
     def initialize(name, arguments)

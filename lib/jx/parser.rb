@@ -13,7 +13,7 @@ module Jx
         while_loop |
         if_a |
         var_decl |
-        fn_decl |
+        fn_def |
         expr |
         fn_return
       ).as(:stmt) >> eol
@@ -71,8 +71,8 @@ module Jx
       str('end')
     end
 
-    rule :fn_decl do
-      str('fn').as(:fn_decl) >> space >> ident >>
+    rule :fn_def do
+      str('fn').as(:fn_def) >> space >> ident >>
       (str('(') >> fn_param.repeat >> str(')')).maybe.as(:params) >>
       (space >> str('->') >> space >> match['a-z'].repeat(1).as(:return_type)).maybe >>
       line_end >>

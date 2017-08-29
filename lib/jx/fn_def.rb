@@ -1,7 +1,7 @@
 require 'erb'
 
 module Jx
-  class Function
+  class FnDef
     attr_accessor :name, :parameters, :stmt_list, :return_type
 
     def initialize(name, parameters, stmt_list, return_type)

@@ -8,18 +8,18 @@ pkg.functions["greet"] = Jx::Function.new(
   ],
   Jx::ExprList.new(
     [
-      Jx::FuncCall.new("puts", [Jx::Variable.new("name")]),
+      Jx::FnCall.new("puts", [Jx::Variable.new("name")]),
     ]
   )
 )
 
-Jx::FuncCall.new("greet", []).to_cpp
+Jx::FnCall.new("greet", []).to_cpp
 
 ast = Jx::ExprList.new(
   [
-    Jx::FuncCall.new("puts", [Jx::StringLiteral.new("Hello, world")]),
-    Jx::FuncCall.new("puts", [Jx::StringLiteral.new("Goodbye, world")]),
-    Jx::FuncCall.new("greet", [Jx::StringLiteral.new("Jack")]),
+    Jx::FnCall.new("puts", [Jx::StringLiteral.new("Hello, world")]),
+    Jx::FnCall.new("puts", [Jx::StringLiteral.new("Goodbye, world")]),
+    Jx::FnCall.new("greet", [Jx::StringLiteral.new("Jack")]),
   ]
 )
 
