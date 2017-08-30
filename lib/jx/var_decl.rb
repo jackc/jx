@@ -11,7 +11,7 @@ module Jx
     end
 
     def analyze(context)
-      context.register_variable(self)
+      context.register_symbol(self)
     end
 
     def to_cpp

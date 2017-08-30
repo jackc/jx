@@ -2,7 +2,7 @@ require 'erb'
 
 require_relative 'parser'
 require_relative 'transform'
-# require 'pp'
+require 'pp'
 
 module Jx
   class Compiler
@@ -15,24 +15,24 @@ module Jx
       abstract_tree = Transform.new.apply(intermediary_tree)
 
       # require 'pry'; binding.pry
-      # pp abstract_tree
+      pp abstract_tree
 
       context = Package.new 'main'
 
       abstract_tree.analyze(context)
 
-      # p symbol_table
-      # p abstract_tree
       # require 'pry'; binding.pry
+
+      # pp context.symbol_table
 
   cpp = ERB.new <<-'CPP'
 #include <iostream>
 
-<% context.functions.each do |_, f| %>
+<% context.functions.each do |f| %>
 <%= f.to_h %>
 <% end %>
 
-<% context.functions.each do |_, f| %>
+<% context.functions.each do |f| %>
 <%= f.to_def %>
 <% end %>
 

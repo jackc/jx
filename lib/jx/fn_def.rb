@@ -22,7 +22,7 @@ module Jx
     end
 
     def analyze(context)
-      context.register_function(self)
+      context.register_symbol(self)
     end
 
     def to_h

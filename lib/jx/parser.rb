@@ -46,8 +46,12 @@ module Jx
         assignment |
         string |
         integer |
-        ident
+        symbol_get
       )
+    end
+
+    rule :symbol_get do
+      ident.as(:symbol_get)
     end
 
     rule :fn_call do
@@ -58,7 +62,7 @@ module Jx
     end
 
     rule :var_decl do
-      str('var').as(:var_decl) >> space >> ident >> space >> match['a-z'].repeat(1).as(:type)
+      str('var').as(:var_decl) >> space >> ident.as(:name) >> space >> match['a-z'].repeat(1).as(:type)
     end
 
     rule :assignment do
@@ -72,7 +76,7 @@ module Jx
     end
 
     rule :fn_def do
-      str('fn').as(:fn_def) >> space >> ident >>
+      str('fn').as(:fn_def) >> space >> ident.as(:name) >>
       (str('(') >> fn_param.repeat >> str(')')).maybe.as(:params) >>
       (space >> str('->') >> space >> match['a-z'].repeat(1).as(:return_type)).maybe >>
       line_end >>
@@ -96,7 +100,7 @@ module Jx
     end
 
     rule :ident do
-      keyword.absent? >> match['a-z'].repeat.as(:ident)
+      keyword.absent? >> match['a-z'].repeat
     end
 
     rule :keyword do

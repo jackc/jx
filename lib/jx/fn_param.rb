@@ -13,6 +13,7 @@ module Jx
     end
 
     def analyze(context)
+      context.register_symbol(self)
     end
 
     def to_cpp
@@ -22,7 +23,7 @@ module Jx
       when "int"
         "int"
       end
-      "#{cpptype} #{@name.to_cpp}"
+      "#{cpptype} #{@name}"
     end
   end
 end

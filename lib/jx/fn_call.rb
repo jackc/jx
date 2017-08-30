@@ -23,7 +23,13 @@ module Jx
     end
 
     def to_cpp
-      "#{name.to_cpp}(#{arguments.map(&:to_cpp).join(", ")})"
+      cpp_name = case name
+      when "puts" then "std::cout<<"
+      when "gets" then "std::cin>>"
+      else name
+      end
+
+      "#{cpp_name}(#{arguments.map(&:to_cpp).join(", ")})"
     end
   end
 end

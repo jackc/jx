@@ -1,20 +1,27 @@
 module Jx
   class Package
-    attr_accessor :name, :functions, :symbol_table
+    attr_accessor :name, :scope
 
     def initialize(name)
       @name = name
-      @functions = {}
-      @symbol_table = {}
+      @scope = Scope.new nil
     end
 
-    def register_function(fn_def)
-      symbol_table[fn_def.name] = fn_def
-      functions[fn_def.name] = fn_def
+    def register_symbol(node)
+      scope.register_symbol(node)
     end
 
-    def register_variable(var_decl)
-      symbol_table[var_decl.name] = var_decl
+    def find_symbol(name)
+      scope.find_symbol(name)
     end
+
+    def new_child_scope
+      scope.new_child_scope
+    end
+
+    def functions
+      scope.symbol_table.select { |_, v| v.kind_of?(FnDef) }.map { |_, v| v }
+    end
+
   end
 end

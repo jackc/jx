@@ -10,18 +10,14 @@ module Jx
     def each_descendant(&block)
       right.each_descendant &block
       yield right
-
-      left.each_descendant &block
-      yield left
     end
 
     def analyze(context)
       right.analyze(context)
-      left.analyze(context)
     end
 
     def to_cpp
-      "#{left.to_cpp} = #{right.to_cpp}"
+      "#{left} = #{right.to_cpp}"
     end
   end
 end
