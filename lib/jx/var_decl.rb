@@ -10,6 +10,10 @@ module Jx
     def each_descendant(&block)
     end
 
+    def analyze(context)
+      context.register_variable(self)
+    end
+
     def to_cpp
       cpptype = case type
       when "string"

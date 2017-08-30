@@ -15,6 +15,12 @@ module Jx
       end
     end
 
+    def analyze(context)
+      if expr
+        expr.analyze(context)
+      end
+    end
+
     def to_cpp
       if expr
         "return #{expr.to_cpp}"

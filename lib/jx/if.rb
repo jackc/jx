@@ -17,6 +17,11 @@ module Jx
       yield stmt_list
     end
 
+    def analyze(context)
+      cond.analyze(context)
+      stmt_list.analyze(context)
+    end
+
     def to_cpp
       <<-CPP
 if(#{@cond.to_cpp}) {

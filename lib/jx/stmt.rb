@@ -5,6 +5,10 @@ module Jx
       yield stmt
     end
 
+    def analyze(context)
+      stmt.analyze(context)
+    end
+
     def to_cpp
       "#{stmt.to_cpp};"
     end

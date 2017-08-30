@@ -7,6 +7,12 @@ module Jx
       end
     end
 
+    def analyze(context)
+      stmt_list.each do |s|
+        s.analyze(context)
+      end
+    end
+
     def to_cpp
       stmt_list.map(&:to_cpp).join("\n")
     end

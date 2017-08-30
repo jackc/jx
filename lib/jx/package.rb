@@ -1,36 +1,20 @@
-require 'erb'
-
-Jx::HEADER_ERB = ERB.new <<-'HEADER'
-#include <string>
-
-<% functions.each do |_, func| %>
-<%= func.to_h %>
-<% end %>
-HEADER
-
-Jx::CPP_ERB = ERB.new <<-'CPP'
-// #include "<%= name %>.h"
-
-<% functions.each do |_, func| %>
-<%= func.to_cpp %>
-<% end %>
-CPP
-
 module Jx
   class Package
-    attr_accessor :name, :functions
+    attr_accessor :name, :functions, :symbol_table
 
     def initialize(name)
       @name = name
       @functions = {}
+      @symbol_table = {}
     end
 
-    def to_h
-      HEADER_ERB.result(binding)
+    def register_function(fn_def)
+      symbol_table[fn_def.name] = fn_def
+      functions[fn_def.name] = fn_def
     end
 
-    def to_cpp
-      CPP_ERB.result(binding)
+    def register_variable(var_decl)
+      symbol_table[var_decl.name] = var_decl
     end
   end
 end

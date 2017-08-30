@@ -16,6 +16,12 @@ module Jx
       end
     end
 
+    def analyze(context)
+      arguments.each do |a|
+        a.analyze(context)
+      end
+    end
+
     def to_cpp
       "#{name.to_cpp}(#{arguments.map(&:to_cpp).join(", ")})"
     end

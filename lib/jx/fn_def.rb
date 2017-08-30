@@ -21,6 +21,10 @@ module Jx
       yield stmt_list
     end
 
+    def analyze(context)
+      context.register_function(self)
+    end
+
     def to_h
       "#{signature};"
     end

@@ -16,6 +16,11 @@ module Jx
       yield right
     end
 
+    def analyze(context)
+      left.analyze(context)
+      right.analyze(context)
+    end
+
     def to_cpp
       "#{left.to_cpp} #{op} #{right.to_cpp}"
     end
