@@ -6,7 +6,7 @@ require 'pp'
 
 module Jx
   class Compiler
-    @@builtin = <<-JX
+    @@builtin = <<-'JX'
 fn puts(s string)
   __cpp
     std::cout << s;
