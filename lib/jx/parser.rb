@@ -15,7 +15,8 @@ module Jx
         var_decl |
         fn_def |
         expr |
-        fn_return
+        fn_return |
+        raw_cpp
       ).as(:stmt) >> eol
     end
 
@@ -103,11 +104,19 @@ module Jx
       keyword.absent? >> match['a-z'].repeat
     end
 
+    rule :raw_cpp do
+      str('__cpp') >>
+      (str('cpp__').absent? >> any).repeat.as(:raw_cpp) >>
+      str('cpp__')
+    end
+
     rule :keyword do
       str('while') |
       str('end') |
       str('if') |
-      str('return')
+      str('return') |
+      str('__cpp') |
+      str('cpp__')
     end
 
     rule :string do

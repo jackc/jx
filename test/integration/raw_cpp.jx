@@ -1,0 +1,3 @@
+__cpp
+std::cout << "Hello, world!";
+cpp__

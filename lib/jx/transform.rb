@@ -21,5 +21,6 @@ module Jx
     rule(fn_def: simple(:fn), name: simple(:name), params: sequence(:params), return_type: simple(:return_type), stmt_list: sequence(:stmt_list)) { FnDef.new name, params, StmtList.new(stmt_list), return_type }
     rule(fn_param: simple(:fn_param), type: simple(:type)) { FnParam.new fn_param, type }
     rule(fn_return: simple(:x), value: simple(:value)) { FnReturn.new value }
+    rule(raw_cpp: simple(:x)) { RawCpp.new x }
   end
 end
