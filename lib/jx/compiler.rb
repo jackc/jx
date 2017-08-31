@@ -43,6 +43,7 @@ JX
 
       context = Package.new 'main'
       context.require_header 'iostream'
+      context.require_header 'cstdint'
 
       abstract_tree.analyze(context)
 
@@ -55,6 +56,7 @@ JX
 #include <<%= h %>>
 <% end %>
 
+namespace jx {
 <% context.functions.each do |f| %>
 <%= f.to_h %>
 <% end %>
@@ -62,6 +64,7 @@ JX
 <% context.functions.each do |f| %>
 <%= f.to_def %>
 <% end %>
+}
 
 int main() {
   <%= abstract_tree.to_cpp %>

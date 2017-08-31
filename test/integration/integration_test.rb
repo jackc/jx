@@ -17,7 +17,7 @@ class IntegrationTest < Minitest::Test
       assert system("jxc", "-o", cpp_source_path, jx_source_path)
 
       bin_path = cpp_source_path.sub(/\.cpp$/, "")
-      assert system("g++", "-g", "-Wall", "-Werror", "-O3", "-o", bin_path, cpp_source_path)
+      assert system("g++", "-std=c++17", "-g", "-Wall", "-Werror", "-O3", "-o", bin_path, cpp_source_path)
 
       Open3.popen3(bin_path) do |stdin, stdout, stderr, wait_thr|
         assert_equal expected_stdout.chomp, stdout.read.chomp

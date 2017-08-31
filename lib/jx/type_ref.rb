@@ -19,7 +19,7 @@ module Jx
       when "string"
         "std::string"
       when "int"
-        "int"
+        "int64_t"
       else
         name
       end

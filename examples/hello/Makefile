@@ -1,6 +1,6 @@
 P=hello
 OBJECTS=hello.o
-CFLAGS = -g -Wall -Werror -O3 -I.
+CPPFLAGS = -std=c++17 -g -Wall -Werror -O3 -I.
 LDLIBS=
 CXX=g++
 

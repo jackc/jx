@@ -23,7 +23,7 @@ module Jx
     end
 
     def to_cpp
-      "#{name}(#{arguments.map(&:to_cpp).join(", ")})"
+      "jx::#{name}(#{arguments.map(&:to_cpp).join(", ")})"
     end
   end
 end
