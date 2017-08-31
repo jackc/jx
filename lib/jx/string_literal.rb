@@ -1,7 +1,13 @@
 require 'parslet'
 
 module Jx
-  StringLiteral = Struct.new(:value) do
+  class StringLiteral
+    attr_accessor :value
+
+    def initialize(value)
+      @value = value
+    end
+
     def each_descendant(&block)
     end
 
@@ -9,7 +15,7 @@ module Jx
     end
 
     def to_cpp
-      value.to_s.inspect
+      %Q["#{value.to_s.gsub('"', '\"')}"]
     end
   end
 end

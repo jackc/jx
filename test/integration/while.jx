@@ -2,5 +2,5 @@ var n int
 n = 0
 while n < 3
   n = n + 1
-  puts("Hello")
+  puts("Hello\n")
 end
