@@ -15,7 +15,9 @@ module Jx
       abstract_tree = Transform.new.apply(intermediary_tree)
 
       # require 'pry'; binding.pry
-      pp abstract_tree
+      if ENV['JX_DEBUG']
+        pp abstract_tree
+      end
 
       context = Package.new 'main'
 
