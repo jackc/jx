@@ -15,7 +15,14 @@ module Jx
     end
 
     def to_cpp
-      @name
+      case name
+      when "string"
+        "std::string"
+      when "int"
+        "int"
+      else
+        name
+      end
     end
   end
 end

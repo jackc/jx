@@ -17,13 +17,7 @@ module Jx
     end
 
     def to_cpp
-      cpptype = case type
-      when "string"
-        "std::string"
-      when "int"
-        "int"
-      end
-      "#{cpptype} #{@name}"
+      "#{type.to_cpp} #{@name}"
     end
   end
 end

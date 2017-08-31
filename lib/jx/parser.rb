@@ -63,7 +63,7 @@ module Jx
     end
 
     rule :var_decl do
-      str('var').as(:var_decl) >> space >> ident.as(:name) >> space >> match['a-z'].repeat(1).as(:type)
+      str('var').as(:var_decl) >> space >> ident.as(:name) >> space >> type_name.as(:type)
     end
 
     rule :assignment do
@@ -86,7 +86,7 @@ module Jx
     end
 
     rule :fn_param do
-      ident.as(:fn_param) >> space >> match['a-z'].repeat(1).as(:type)
+      ident.as(:fn_param) >> space >> type_name.as(:type)
     end
 
     rule :fn_return do
@@ -102,6 +102,10 @@ module Jx
 
     rule :ident do
       keyword.absent? >> match['a-z'].repeat
+    end
+
+    rule :type_name do
+      keyword.absent? >> match['a-z'].repeat(1).as(:type_name)
     end
 
     rule :raw_cpp do

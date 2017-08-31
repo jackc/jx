@@ -4,6 +4,7 @@ module Jx
   class Transform < Parslet::Transform
     rule(:stripped => simple(:x)) { x }
     rule(:symbol_get => simple(:x)) { SymbolGet.new x }
+    rule(:type_name => simple(:x)) { TypeRef.new x }
     rule(:string => simple(:x)) { StringLiteral.new x }
     rule(:integer => simple(:x)) { IntegerLiteral.new x }
     rule(:fn_name => simple(:fn_name)) { FnCall.new(fn_name, []) }
