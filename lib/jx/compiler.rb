@@ -20,6 +20,7 @@ module Jx
       end
 
       context = Package.new 'main'
+      context.require_header 'iostream'
 
       abstract_tree.analyze(context)
 
@@ -28,7 +29,9 @@ module Jx
       # pp context.symbol_table
 
   cpp = ERB.new <<-'CPP'
-#include <iostream>
+<% context.headers.each do |h| %>
+#include <<%= h %>>
+<% end %>
 
 <% context.functions.each do |f| %>
 <%= f.to_h %>
