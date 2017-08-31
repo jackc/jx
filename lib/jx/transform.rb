@@ -18,6 +18,7 @@ module Jx
     rule(while_cond: simple(:cond), stmt_list: sequence(:stmt_list)) { WhileLoop.new cond, StmtList.new(stmt_list) }
     rule(if_cond: simple(:cond), stmt_list: sequence(:stmt_list)) { If.new cond, StmtList.new(stmt_list) }
     rule(fn_def: simple(:fn), name: simple(:name), params: simple(:none), stmt_list: sequence(:stmt_list)) { FnDef.new name, [], StmtList.new(stmt_list), nil }
+    rule(fn_def: simple(:fn), name: simple(:name), params: simple(:none), return_type: simple(:return_type), stmt_list: sequence(:stmt_list)) { FnDef.new name, [], StmtList.new(stmt_list), return_type }
     rule(fn_def: simple(:fn), name: simple(:name), params: sequence(:params), stmt_list: sequence(:stmt_list)) { FnDef.new name, params, StmtList.new(stmt_list), nil }
     rule(fn_def: simple(:fn), name: simple(:name), params: sequence(:params), return_type: simple(:return_type), stmt_list: sequence(:stmt_list)) { FnDef.new name, params, StmtList.new(stmt_list), return_type }
     rule(fn_param: simple(:fn_param), type: simple(:type)) { FnParam.new fn_param, type }

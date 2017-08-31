@@ -9,4 +9,4 @@ var n int
 n = 40
 var m int
 m = 2
-puts(n+m)
+puti(n+m)

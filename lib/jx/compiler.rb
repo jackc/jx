@@ -6,12 +6,34 @@ require 'pp'
 
 module Jx
   class Compiler
+    @@builtin = <<-JX
+fn puts(s string)
+  __cpp
+    std::cout << s;
+  cpp__
+end
+
+fn puti(i int)
+  __cpp
+    std::cout << i;
+  cpp__
+end
+
+fn gets -> string
+  var s string
+  __cpp
+    std::cin >> s;
+  cpp__
+  return s
+end
+JX
+
     def initialize(src)
       @src = src
     end
 
     def to_cpp
-      intermediary_tree = Parser.new.parse(@src)
+      intermediary_tree = Parser.new.parse(@@builtin + @src)
       abstract_tree = Transform.new.apply(intermediary_tree)
 
       # require 'pry'; binding.pry

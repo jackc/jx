@@ -79,7 +79,7 @@ module Jx
     rule :fn_def do
       str('fn').as(:fn_def) >> space >> ident.as(:name) >>
       (str('(') >> fn_param.repeat >> str(')')).maybe.as(:params) >>
-      (space >> str('->') >> space >> match['a-z'].repeat(1).as(:return_type)).maybe >>
+      (space >> str('->') >> space >> type_name.as(:return_type)).maybe >>
       line_end >>
         stmt_list >>
       str('end')

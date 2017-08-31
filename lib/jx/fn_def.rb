@@ -8,7 +8,7 @@ module Jx
       @name = name
       @parameters = parameters
       @stmt_list = stmt_list
-      @return_type = return_type || "void"
+      @return_type = return_type || TypeRef.new("void")
     end
 
     def each_descendant(&block)
@@ -39,7 +39,7 @@ module Jx
 
   private
     def signature
-      "#{return_type} #{name}(#{parameters.map(&:to_cpp).join(", ")})"
+      "#{return_type.to_cpp} #{name}(#{parameters.map(&:to_cpp).join(", ")})"
     end
   end
 end
