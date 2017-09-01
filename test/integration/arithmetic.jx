@@ -22,3 +22,6 @@ puts("\n")
 
 puti(n/m)
 puts("\n")
+
+puti(n%m)
+puts("\n")

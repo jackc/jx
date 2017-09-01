@@ -24,7 +24,7 @@ module Jx
       space.repeat >> atom.as(:stripped) >> space.repeat
     end
 
-    rule(:mul_op) { strip match['*/'] }
+    rule(:mul_op) { strip match['*/%'] }
     rule(:add_op) { strip match['+-'] }
     rule(:comp_op) { strip (str('==') | str('>=') | str('<=') | match['<>']) }
 
