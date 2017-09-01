@@ -1,3 +1,39 @@
+puts("0 == 0 ")
 if 0 == 0
-  puts("0 == 0 success\n")
+  puts("success")
+else
+  puts("failure")
 end
+puts("\n")
+
+puts("0 < 1 ")
+if 0 < 1
+  puts("success")
+else
+  puts("failure")
+end
+puts("\n")
+
+puts("1 > 0 ")
+if 1 > 0
+  puts("success")
+else
+  puts("failure")
+end
+puts("\n")
+
+puts("1 <= 1 ")
+if 1 <= 1
+  puts("success")
+else
+  puts("failure")
+end
+puts("\n")
+
+puts("1 >= 1 ")
+if 1 >= 1
+  puts("success")
+else
+  puts("failure")
+end
+puts("\n")
