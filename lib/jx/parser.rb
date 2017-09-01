@@ -28,6 +28,8 @@ module Jx
     rule(:add_op) { strip match['+-'] }
     rule(:rel_op) { strip (str('>=') | str('<=') | match['<>']) }
     rule(:eq_op) { strip (str('!=') | str('==')) }
+    rule(:logical_and) { strip str('&&') }
+    rule(:logical_or) { strip str('||') }
 
     rule :expr do
       infix_expr |
@@ -36,10 +38,12 @@ module Jx
 
     rule :infix_expr do
       infix_expression(simple_expr,
-        [mul_op, 4, :left],
-        [add_op, 3, :left],
-        [rel_op, 2, :left],
-        [eq_op, 1, :left]
+        [mul_op, 6, :left],
+        [add_op, 5, :left],
+        [rel_op, 4, :left],
+        [eq_op, 3, :left],
+        [logical_and, 2, :left],
+        [logical_or, 1, :left],
       )
     end
 
