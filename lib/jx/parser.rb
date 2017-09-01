@@ -26,7 +26,7 @@ module Jx
 
     rule(:mul_op) { strip match['*/'] }
     rule(:add_op) { strip match['+-'] }
-    rule(:comp_op) { strip match['<>'] }
+    rule(:comp_op) { strip (str('==') | match['<>']) }
 
     rule :expr do
       infix_expr |

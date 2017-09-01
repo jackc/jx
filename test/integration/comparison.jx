@@ -1,0 +1,3 @@
+if 0 == 0
+  puts("0 == 0 success\n")
+end
