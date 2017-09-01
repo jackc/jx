@@ -2,32 +2,43 @@ require 'erb'
 
 module Jx
   class If
-    attr_accessor :cond, :stmt_list
+    attr_accessor :cond, :if_block, :else_block
 
-    def initialize(cond, stmt_list)
+    def initialize(cond, if_block, else_block)
       @cond = cond
-      @stmt_list = stmt_list
+      @if_block = if_block
+      @else_block = else_block
     end
 
     def each_descendant(&block)
       cond.each_descendant &block
       yield cond
 
-      stmt_list.each_descendant &block
-      yield stmt_list
+      if_block.each_descendant &block
+      yield if_block
     end
 
     def analyze(context)
       cond.analyze(context)
-      stmt_list.analyze(context)
+      if_block.analyze(context)
     end
 
     def to_cpp
-      <<-CPP
+      s = <<-CPP
 if(#{@cond.to_cpp}) {
-  #{@stmt_list.to_cpp}
+  #{@if_block.to_cpp}
 }
 CPP
+
+      if else_block
+        s += <<-CPP
+else {
+  #{@else_block.to_cpp}
+}
+CPP
+      end
+
+      s
     end
   end
 end

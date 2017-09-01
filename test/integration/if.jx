@@ -1,8 +1,13 @@
 var n int
 n = 2
 if n < 1
-  puts("Doesn't get here")
+  puts("Doesn't get here\n")
 end
 if n < 3
-  puts("Here")
+  puts("Here\n")
+end
+if n < 1
+  puts("Doesn't get here")
+else
+  puts("Here\n")
 end

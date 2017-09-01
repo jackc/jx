@@ -96,7 +96,9 @@ module Jx
     # if_a instead of if because if is already Ruby keyword
     rule :if_a do
       str('if') >> space >> expr.as(:if_cond) >> line_end >>
-        stmt_list >>
+        stmt_list.as(:if_block) >>
+      (str('else') >> line_end >>
+        stmt_list).maybe.as(:else_block) >>
       str('end')
     end
 
@@ -118,6 +120,7 @@ module Jx
       str('while') |
       str('end') |
       str('if') |
+      str('else') |
       str('return') |
       str('__cpp') |
       str('cpp__')
