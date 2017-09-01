@@ -6,6 +6,14 @@ else
 end
 puts("\n")
 
+puts("0 != 1 ")
+if 0 != 1
+  puts("success")
+else
+  puts("failure")
+end
+puts("\n")
+
 puts("0 < 1 ")
 if 0 < 1
   puts("success")
