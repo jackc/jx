@@ -1,0 +1,15 @@
+var n int
+n = 0
+while n < 100
+  n = n + 1
+  if n % 3 != 0 && n % 5 != 0
+    puti(n)
+  end
+  if n % 3 == 0
+    puts("fizz")
+  end
+  if n % 5 == 0
+    puts("buzz")
+  end
+  puts("\n")
+end

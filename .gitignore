@@ -1,6 +1,6 @@
 *.cpp
 *.o
 
-examples/ast/ast
+examples/fizzbuzz/fizzbuzz
 examples/hello/hello
 tmp/*
