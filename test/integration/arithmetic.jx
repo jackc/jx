@@ -4,9 +4,21 @@ var lastname string
 lastname = "Smith"
 var name string
 name = firstname + " " + lastname
-puts(name)
+puts(name + "\n")
+
 var n int
-n = 40
+n = 7
 var m int
-m = 2
+m = 3
+
 puti(n+m)
+puts("\n")
+
+puti(n-m)
+puts("\n")
+
+puti(n*m)
+puts("\n")
+
+puti(n/m)
+puts("\n")
